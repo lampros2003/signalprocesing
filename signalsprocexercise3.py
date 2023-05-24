@@ -17,25 +17,27 @@ length_in_s = sound.shape[0] / sampFreq
 time = np.arange(sound.shape[0]) / sound.shape[0] * length_in_s
 
 # get the fft
-#i use 3000 samples as 80 didnt provide a good enough image
+#i use 4000 samples as 80 didnt provide a good enough image
 fft_spectrum = np.fft.rfft(sound[:4000])
 #get abs so i can plot
 fft_spectrum_abs = np.abs(fft_spectrum)
 # get frequencies in signal
-freq = np.fft.rfftfreq(4000, d=0.5/sampFreq)
+freq = np.fft.rfftfreq(4000, d=1/sampFreq)
 
 #
-fft_spectrum_abs = fft_spectrum_abs / max(fft_spectrum_abs)
+lfft_spectrum_abs = fft_spectrum_abs / max(fft_spectrum_abs)
 
 plt.subplot(1,2,1)
 #plot first 80 samples as dictated
 plt.stem(range(80),sound[:80],'-o',)
 
-plt.xlabel("left channel, sample #")
+plt.xlabel("x(n), sample #")
 plt.tight_layout()
 
 plt.subplot(1,2,2)
 plt.plot(freq, fft_spectrum_abs)
+plt.plot(sampFreq/2+freq, np.flip(fft_spectrum_abs))
+
 plt.xlabel("frequency, Hz")
 plt.ylabel("Amplitude, units")
 plt.tight_layout()

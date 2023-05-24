@@ -22,7 +22,7 @@ fft_spectrum1 = np.fft.rfft(sound[:1000])
 #get abs so i can plot
 fft_spectrum_abs1 = np.abs(fft_spectrum1)
 # get frequencies in signal
-freq = np.fft.rfftfreq(1000, d=0.5/sampFreq)
+freq = np.fft.rfftfreq(1000, d=1/sampFreq)
 fft_spectrum_abs1 = fft_spectrum_abs1 / max(fft_spectrum_abs1)
 plt.subplot(1,2,1)
 
@@ -30,16 +30,20 @@ fft_spectrum2 = np.fft.rfft([y(n)for n in range(1000)])
 #get abs so i can plot
 fft_spectrum_abs2 = np.abs(fft_spectrum2)
 # get frequencies in signal
-freq = np.fft.rfftfreq(1000, d=0.5/sampFreq)
+freq = np.fft.rfftfreq(1000, d=1/sampFreq)
 fft_spectrum_abs2 = fft_spectrum_abs2 / max(fft_spectrum_abs2)
 
 
 plt.subplot(1,2,1)
 plt.plot(freq, fft_spectrum_abs1)
+plt.plot(max(freq)+freq, np.flip(fft_spectrum_abs1))
+
 plt.xlabel("frequency, Hz x()")
 plt.ylabel("Amplitude, units")
 plt.subplot(1,2,2)
 plt.plot(freq, fft_spectrum_abs2)
+plt.plot(max(freq)+freq, np.flip(fft_spectrum_abs2))
+
 
 plt.xlabel("frequency, Hz y(n)")
 plt.ylabel("Amplitude, units")
