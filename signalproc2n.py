@@ -33,14 +33,16 @@ freq = np.fft.rfftfreq(4000, d=1/sampFreq)
 fft_spectrum_abs = fft_spectrum_abs / max(fft_spectrum_abs)
 
 plt.subplot(1,2,1)
-#plot first 80 samples as dictated
+#plot first 40 samples as dictated
 plt.stem(range(40),sound[:40],'-o',)
 
 plt.xlabel("x(2n), sample #")
 plt.tight_layout()
 
 plt.subplot(1,2,2)
+plt.plot(freq, fft_spectrum_abs)
 plt.plot(sampFreq/2+freq, np.flip(fft_spectrum_abs))
+
 plt.xlabel("frequency, Hz")
 plt.ylabel("Amplitude, units")
 plt.tight_layout()
